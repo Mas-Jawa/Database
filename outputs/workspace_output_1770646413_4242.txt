@@ -1,0 +1,2 @@
+replace .agent_hooks/run_all_hooks.py? [y]es, [n]o, [A]ll, [N]one, [r]ename:  NULL
+(EOF or read error, treating as "[N]one" ...)

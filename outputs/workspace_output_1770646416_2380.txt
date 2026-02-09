@@ -1,0 +1,18 @@
+Archive:  Databesnew.zip
+  inflating: .agent_hooks/run_all_hooks.py  
+  inflating: .agent_hooks/startup/_readme.txt  
+  inflating: .agent_hooks/shutdown/00_track_processes_on_ports.py  
+  inflating: .agent_hooks/shutdown/_readme.txt  
+  inflating: index.html              
+ extracting: outputs/workspace_output_1770645184_8447.txt  
+  inflating: outputs/workspace_output_1770645171_9041.txt  
+  inflating: styles.css              
+total 40
+drwxr-xr-x  4 user user 4096 Feb  9 14:13 .
+drwxr-xr-x 20 root root 4096 Feb  6 01:46 ..
+drwxr-xr-x  4 user user 4096 Feb  9 14:13 .agent_hooks
+-rw-r--r--  1 root root 8433 Feb  9 14:13 Databesnew.zip
+-rw-r--r--  1 root root 2202 Feb  9 13:56 index.html
+drwxr-xr-x  2 root root 4096 Feb  9 14:13 outputs
+-rw-r--r--  1 root root 2995 Feb  9 13:52 styles.css
+-rw-r--r--  1 root root  316 Feb  9 14:13 todo.md
