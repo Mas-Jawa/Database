@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lock Database</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="icon">
+            <span class="lock-icon">🔒</span>
+        </div>
+        <h1 class="title">LOCK DATABASE</h1>
+        <p class="subtitle">Cek Database yang Terkunci</p>
+        
+        <div class="input-group">
+            <label for="databaseName">Masukkan Nama Database:</label>
+            <input type="password" id="databaseName" placeholder="" autocomplete="off">
+        </div>
+        
+        <button class="check-btn" onclick="checkDatabase()" id="checkBtn">CEK DATABASE</button>
+        
+        <!-- Loading Bar -->
+        <div class="loading-container" id="loadingContainer">
+            <div class="loading-bar" id="loadingBar"></div>
+            <div class="loading-text" id="loadingText">Memproses database... <span id="loadingPercent">0</span>%</div>
+        </div>
+        
+        <!-- Error Message -->
+        <div class="error-message" id="errorMessage">
+            <p>❌ Data tersebut tidak ditemukan</p>
+        </div>
+        
+        <div class="result" id="result">
+            <h3>🔍 Hasil Pengecekan:</h3>
+            <p><strong>Nama:</strong> <span id="resultName"></span></p>
+            <p class="expired">⚠️ Database telah kadaluwarsa 47 hari yang lalu</p>
+            <p class="locked-by">🔐 Penguncian dilakukan oleh: <span id="lockedBy">Mas-Jawa</span></p>
+        </div>
+    </div>
+
+    <script>
+        function checkDatabase() {
+            const databaseName = document.getElementById('databaseName').value.trim().toLowerCase();
+            const validName = 'wahyu putra pamungkas';
+            const resultDiv = document.getElementById('result');
+            const resultName = document.getElementById('resultName');
+            const lockedBy = document.getElementById('lockedBy');
+            const loadingContainer = document.getElementById('loadingContainer');
+            const loadingBar = document.getElementById('loadingBar');
+            const loadingText = document.getElementById('loadingText');
+            const loadingPercent = document.getElementById('loadingPercent');
+            const errorMessage = document.getElementById('errorMessage');
+            const checkBtn = document.getElementById('checkBtn');
+            
+            // Reset previous states
+            resultDiv.classList.remove('show');
+            errorMessage.classList.remove('show');
+            
+            if (databaseName === '') {
+                alert('Silakan masukkan nama database!');
+                return;
+            }
+            
+            // Validate name
+            if (databaseName !== validName) {
+                errorMessage.classList.add('show');
+                setTimeout(() => {
+                    errorMessage.classList.remove('show');
+                }, 3000);
+                return;
+            }
+            
+            // Show loading bar for 10 seconds
+            loadingContainer.classList.add('show');
+            checkBtn.disabled = true;
+            checkBtn.textContent = 'MEMPROSES...';
+            
+            let progress = 0;
+            const duration = 10000; // 10 seconds
+            const intervalTime = 100; // Update every 100ms
+            const progressStep = 100 / (duration / intervalTime);
+            
+            const loadingInterval = setInterval(() => {
+                progress += progressStep;
+                if (progress >= 100) {
+                    progress = 100;
+                    clearInterval(loadingInterval);
+                    
+                    // Hide loading and show result
+                    setTimeout(() => {
+                        loadingContainer.classList.remove('show');
+                        resultName.textContent = document.getElementById('databaseName').value;
+                        lockedBy.textContent = 'Mas-Jawa';
+                        resultDiv.classList.add('show');
+                        checkBtn.disabled = false;
+                        checkBtn.textContent = 'CEK DATABASE';
+                        document.getElementById('databaseName').value = '';
+                    }, 500);
+                }
+                
+                loadingBar.style.width = progress + '%';
+                loadingPercent.textContent = Math.floor(progress);
+            }, intervalTime);
+        }
+        
+        document.getElementById('databaseName').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                checkDatabase();
+            }
+        });
+    </script>
+</body>
+</html>
